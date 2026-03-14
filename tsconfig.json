@@ -1,0 +1,37 @@
+{
+  "files": [],
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "jsx": "preserve", // 允许在 .tsx 文件中使用 JSX
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": [
+      "vite/client"
+    ] // 添加 Vite 的类型定义，以便更好地支持 Vite 的模块热更新等特性
+  },
+  "include": [
+    "src/&zwnj;**/*.ts",
+    "src/**&zwnj;/*.d.ts",
+    "src/&zwnj;**/*.tsx",
+    "src/**&zwnj;/*.vue"
+  ], // 确保包含 .tsx 文件
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.web.json"
+    }
+  ]
+}
