@@ -1,16 +1,28 @@
 <template>
-  <button class="btn" type="button" @click="createContentByJSX">JSX</button>
-  <button class="btn" type="button" @click="createContentByText">文本</button>
-  <button class="btn" type="button" @click="createContentByRenderFunction">渲染函数</button>
-  <button class="btn" type="button" @click="createContentByFunction">函数</button>
-  <button class="btn" type="button" @click="createContentByComponent">组件</button>
+  <div class="box">
+    <!-- <button class="btn" type="button" @click="createContentByJSX">JSX666</button>
+    <button class="btn" type="button" @click="createContentByText">文本</button>
+    <button class="btn" type="button" @click="createContentByRenderFunction">渲染函数</button>
+    <button class="btn" type="button" @click="createContentByFunction">函数</button>
+    <button class="btn" type="button" @click="createContentByComponent">组件</button> -->
+  </div>
 </template>
 
 <script lang="tsx" setup>
 import WinBody from './WinBody.vue'
-
-import { h } from 'vue'
+import '@dongls/xwindow/dist/index.css'
+import { h, onMounted } from 'vue'
 import { useWindow } from '@dongls/xwindow'
+import type { UseBlankWindowOptions, WindowBody } from '@dongls/xwindow'
+import { useBlankWindow, BlankWindow, WindowMenus } from '@dongls/xwindow'
+import Modal from './Modal.vue'
+
+function useModal(title: string, body: WindowBody, params: UseBlankWindowOptions = {}) {
+  params.height = params.height ?? '320px'
+
+  // 这里使用空白窗口，实现自定义
+  return useBlankWindow(title, <Modal>{body}</Modal>, params)
+}
 
 function createContentByJSX(): void {
   useWindow('窗口1', <div class="example-body">这段文本是使用JSX创建的。</div>)
@@ -31,4 +43,22 @@ function createContentByFunction(): void {
 function createContentByComponent(): void {
   useWindow('窗口5', <WinBody text="这段文本通过组件创建的。" />)
 }
+onMounted(() => {
+  createContentByComponent()
+  window.addEventListener('mousemove', (event) => {
+    console.log('mousemove', event)
+    let flag = event.target === document.documentElement
+    if (flag) {
+      window.api.setIgnoreMouseEvents(true, { forward: true })
+    } else {
+      window.api.setIgnoreMouseEvents(false)
+    }
+  })
+  window.api.setIgnoreMouseEvents(true, { forward: true })
+})
 </script>
+<style lang="less" scoped>
+.xwindow {
+  pointer-events: auto;
+}
+</style>

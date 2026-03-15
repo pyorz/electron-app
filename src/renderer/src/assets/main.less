@@ -1,20 +1,25 @@
-@import './base.css';
-
+// @import './base.less';
+html,body { 
+  pointer-events: none;
+}
 body {
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-image: url('./wavy-lines.svg');
-  background-size: cover;
+  // background-image: url('./wavy-lines.svg');
+  // background-size: cover;
   user-select: none;
+}
+.xwindow {
+  pointer-events: auto;
 }
 
 code {
   font-weight: 600;
   padding: 3px 5px;
   border-radius: 2px;
-  background-color: var(--color-background-mute);
+  // background-color: var(--color-background-mute);
   font-family:
     ui-monospace,
     SFMono-Regular,

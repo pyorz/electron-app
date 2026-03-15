@@ -1,8 +1,12 @@
-import { contextBridge } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 
 // Custom APIs for renderer
-const api = {}
+const api = {
+  setIgnoreMouseEvents: (ignore: boolean, options?: { forward?: boolean }) =>
+    ipcRenderer.send('set-ignore-mouse-events', ignore, options),
+  getCurrentWindow: () => ipcRenderer.invoke('get-current-window')
+}
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise

@@ -1,4 +1,4 @@
-import './assets/main.css'
+import './assets/main.less'
 
 import '@dongls/xwindow/dist/index.css'
 import { xWindow } from '@dongls/xwindow'
